@@ -1,0 +1,48 @@
+## Codebook for run_analysis.R
+
+The following describes how the finalAverages object was created. finalAverages contains measurements taken from Samsung Galaxy S smartphones tied to participants, who were either in a test group or a training group, while they performed 6 activities:  walking, walking upstairs, walking downstairs, sitting, standing, and laying. Measurements were collected for the following variables  (also called "features"):
+
+* tBodyAcc-XYZ
+* tGravityAcc-XYZ
+* tBodyAccJerk-XYZ
+* tBodyGyro-XYZ
+* tBodyGyroJerk-XYZ
+* tBodyAccMag
+* tGravityAccMag
+* tBodyAccJerkMag
+* tBodyGyroMag
+* tBodyGyroJerkMag
+* fBodyAcc-XYZ
+* fBodyAccJerk-XYZ
+* fBodyGyro-XYZ
+* fBodyAccMag
+* fBodyAccJerkMag
+* fBodyGyroMag
+* fBodyGyroJerkMag
+
+For each of these measurements, we are only interested in means and standard deviations that were collected, among other types of calculations (e.g., maximum, minimum, correlation, etc.) For more information about these measurements, please visit: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+
+The following files contained raw data needed for the final object. Additional information is provided after passing each file through these functions: dim() to get the number of rows and cols, names() to get the variable names that I may need to manipulate, and table() to get the counts of each unique variable. (Note: the table() function for xTest and xTrain gave errors; files too large). These functions helped me determine how pieces of the data fit together to create finalAverages.
+
+File        | Content                         | Col Name(s) | Rows x Columns
+------------|---------------------------------|-------------|---------------
+subjectTest | ID #s of subjects in the test group | V1 | 2947 x 1      
+subjectTrain| ID #s of subjects in the train group | V1 | 7352 x 1
+yTest | Activity #s for subjects in the test group | V1 | 2947 x 1 
+yTrain | Activity #s for subjects in the train group | V1 | 7352 x 1
+xTest | Feature measurements for subjects in the test group | Start with V and run from 1:561 | 2947 x 561
+xTrain | Feature measurements for subjects in the train group | Start with V and run from 1:561 | 7352 x 561
+featuresDF | 1 col with #s from 1:561 & another col with names of the variables corresponding to xTest & xTrain | V1 & V2 | 561 x 2
+activityLabel | #s 1-6 in 1 col and 6 activities in another column | V1 & V2 | 6 x 2
+
+The following manipulations/calculations were made to the files, per the project requirements:
+
+* The following descriptive labels were included in files that contained the label's information: Activity, SubjectID, and all of the feature labels were pasted onto the files with such measurements
+* Actual activity names were selected instead of using activity numbers
+* Only feature columns containing means and standard deviations were extracted
+* Files were bound by columns or by row, depending on the type of data they contained (e.g., test and training data files were bound by rows), and the final object was one merged data set.
+* A data set, finalAverages, was created into a csv file with the above requirements and with means of each of the mean and standard deviation feature measurements across activity type and across subject ID
+
+Please see run_analysis.R for syntax.
+
+
